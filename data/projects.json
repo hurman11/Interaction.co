@@ -16,17 +16,17 @@
   },
   {
     "id": "p2",
-    "title": "Next Big Thing",
+    "title": "Project Under Making",
     "category": "Coming Soon",
     "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
     "link": "#",
     "year": "SOON",
-    "description": "A next-generation stealth project currently under active development. High-performance, AI-driven architecture coming very soon.",
-    "tags": ["Stealth Mode", "AI", "In Development"],
+    "description": "This project is currently under making and active development. Details will be unveiled soon.",
+    "tags": ["Under Making", "In Progress", "Coming Soon"],
     "outcomes": [
-      { "label": "Status", "value": "In Stealth" },
-      { "label": "Progress", "value": "85%" },
-      { "label": "Launch", "value": "Coming Soon" }
+      { "label": "Status", "value": "Under Making" },
+      { "label": "Progress", "value": "In Development" },
+      { "label": "Release", "value": "Coming Soon" }
     ]
   }
 ]
