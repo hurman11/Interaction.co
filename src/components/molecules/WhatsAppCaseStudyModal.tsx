@@ -78,30 +78,22 @@ export function WhatsAppCaseStudyModal({ isOpen, onClose }: WhatsAppCaseStudyMod
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-[201] flex items-center justify-center p-3 sm:p-6 md:p-10 pointer-events-none"
           >
-            <div className="relative w-full max-w-4xl max-h-[85vh] md:max-h-[90vh] overflow-y-auto rounded-3xl glass-card border border-black/10 dark:border-white/10 bg-white/90 dark:bg-[#08080a]/90 backdrop-blur-xl shadow-2xl pointer-events-auto flex flex-col text-text-primary">
+            <div className="relative w-full max-w-4xl max-h-[90dvh] overflow-y-auto rounded-3xl glass-card border border-black/10 dark:border-white/10 bg-white/95 dark:bg-[#08080a]/95 backdrop-blur-2xl shadow-2xl pointer-events-auto flex flex-col text-text-primary">
               
-              {/* Sticky Top Bar / Close Button */}
-              <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 py-3.5 bg-white/95 dark:bg-[#08080a]/95 backdrop-blur-xl border-b border-black/5 dark:border-white/10 shrink-0">
-                <div className="flex items-center gap-2 min-w-0 pr-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                  <span className="font-mono text-[0.7rem] sm:text-xs font-bold uppercase tracking-widest text-text-muted truncate">
-                    WhatsApp AI Agent
-                  </span>
-                </div>
-                <button
-                  onClick={onClose}
-                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 border border-black/5 dark:border-white/10 transition-colors text-text-primary shrink-0"
-                  aria-label="Close modal"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
+              {/* Floating Close Button */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center bg-black/40 hover:bg-black/60 dark:bg-white/10 dark:hover:bg-white/20 border border-white/10 backdrop-blur-md text-white transition-colors"
+                aria-label="Close modal"
+              >
+                <X className="w-4 h-4" />
+              </button>
 
               {/* Main Content Area */}
               <div className="p-5 sm:p-8 md:p-10 space-y-8 md:space-y-10">
 
                 {/* HERO HEADER & LIVE TERMINAL SHOWCASE */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 border-b border-black/5 dark:border-white/10 pb-8 items-start pt-1 sm:pt-0">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 border-b border-black/5 dark:border-white/10 pb-8 items-start pt-1 sm:pt-0 pr-10 sm:pr-12 lg:pr-0">
                   <div className="lg:col-span-7 space-y-4">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-bold tracking-wider uppercase">
                       <Bot className="w-3.5 h-3.5" />
