@@ -56,54 +56,62 @@ export function InkBackground() {
     // Initialize fluid simulation with current theme config
     webGLFluidEnhanced(canvas, getConfig(isDarkMode));
 
-    // Forward mouse & touch movement from window to canvas safely.
-    // In 'hover' mode, webgl-fluid only tracks a single mouse hover pointer (pointer 0).
-    // Dispatching mousedown/touchstart/mouseup or raw touch events causes webgl-fluid to access undefined pointer.down.
-    // Translating all position updates into clean mousemove events ensures smooth fluid trails without mobile errors.
+    // Forward mouse events from window to canvas 
+    // because the canvas is z-[-50] and covered by other DOM elements
     let lastMouseX = window.innerWidth / 2;
     let lastMouseY = window.innerHeight / 2;
 
-    const forwardMovement = (e: MouseEvent | TouchEvent) => {
-      try {
-        if (!canvas) return;
-        if (e.target === canvas) return;
+    const forwardEvent = (e: MouseEvent | TouchEvent, type: string) => {
+      if (!canvas) return;
+      if (e.target === canvas) return; // Prevent infinite loop when event bubbles back to window
 
-        let clientX = lastMouseX;
-        let clientY = lastMouseY;
+      let clientX = lastMouseX;
+      let clientY = lastMouseY;
 
-        if (e instanceof MouseEvent) {
-          clientX = e.clientX;
-          clientY = e.clientY;
-        } else if (e.touches && e.touches.length > 0) {
-          clientX = e.touches[0].clientX;
-          clientY = e.touches[0].clientY;
-        } else if (e.changedTouches && e.changedTouches.length > 0) {
-          clientX = e.changedTouches[0].clientX;
-          clientY = e.changedTouches[0].clientY;
-        }
-
-        lastMouseX = clientX;
-        lastMouseY = clientY;
-
-        const fakeEvent = new MouseEvent('mousemove', {
-          bubbles: true,
-          cancelable: true,
-          clientX,
-          clientY,
-        });
-        canvas.dispatchEvent(fakeEvent);
-      } catch {
-        // Prevent any internal webgl-fluid touch exceptions from surfacing
+      if (e instanceof MouseEvent) {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      } else if (e.type === 'touchend' && e.changedTouches && e.changedTouches.length > 0) {
+        clientX = e.changedTouches[0].clientX;
+        clientY = e.changedTouches[0].clientY;
+      } else if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
       }
+
+      lastMouseX = clientX;
+      lastMouseY = clientY;
+
+      // Translate touch events to mouse events for the canvas.
+      // Synthesizing TouchEvents accurately is very difficult and missing properties 
+      // (like changedTouches) will crash webgl-fluid.
+      const mouseType = type
+        .replace('touchstart', 'mousedown')
+        .replace('touchmove', 'mousemove')
+        .replace('touchend', 'mouseup');
+
+      const newEvent = new MouseEvent(mouseType, {
+        bubbles: true,
+        cancelable: true,
+        clientX,
+        clientY,
+      });
+      canvas.dispatchEvent(newEvent);
     };
 
-    const onMouseMove = (e: MouseEvent) => forwardMovement(e);
-    const onTouchMove = (e: TouchEvent) => forwardMovement(e);
-    const onTouchStart = (e: TouchEvent) => forwardMovement(e);
+    const onMouseMove = (e: MouseEvent) => forwardEvent(e, 'mousemove');
+    const onTouchMove = (e: TouchEvent) => forwardEvent(e, 'touchmove');
+    const onMouseDown = (e: MouseEvent) => forwardEvent(e, 'mousedown');
+    const onTouchStart = (e: TouchEvent) => forwardEvent(e, 'touchstart');
+    const onMouseUp = (e: MouseEvent) => forwardEvent(e, 'mouseup');
+    const onTouchEnd = (e: TouchEvent) => forwardEvent(e, 'touchend');
 
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
-    window.addEventListener('touchmove', onTouchMove, { passive: true });
-    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('touchstart', onTouchStart);
+    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('touchend', onTouchEnd);
 
     // Add scroll animation to simulate fluid ripples when scrolling
     const scrollContainer = document.getElementById('main-scroll-container');
@@ -111,43 +119,43 @@ export function InkBackground() {
 
     let lastScrollY = scrollContainer.scrollTop;
     const onScroll = () => {
-      try {
-        if (!canvas) return;
-        const currentScrollY = scrollContainer.scrollTop;
-        const deltaY = currentScrollY - lastScrollY;
-        lastScrollY = currentScrollY;
+      if (!canvas) return;
+      const currentScrollY = scrollContainer.scrollTop;
+      const deltaY = currentScrollY - lastScrollY;
+      lastScrollY = currentScrollY;
 
-        if (Math.abs(deltaY) > 2) {
-          // Move the fluid opposite to scroll direction
-          lastMouseY -= deltaY * 1.5;
+      if (Math.abs(deltaY) > 2) {
+        // Move the fluid opposite to scroll direction
+        lastMouseY -= deltaY * 1.5;
 
-          // Add slight horizontal wiggle to make it look like a natural current
-          lastMouseX += (Math.random() - 0.5) * 40;
+        // Add slight horizontal wiggle to make it look like a natural current
+        lastMouseX += (Math.random() - 0.5) * 40;
 
-          // Keep coordinates within bounds
-          if (lastMouseY < 0) lastMouseY = window.innerHeight;
-          if (lastMouseY > window.innerHeight) lastMouseY = 0;
-          if (lastMouseX < 0) lastMouseX = window.innerWidth;
-          if (lastMouseX > window.innerWidth) lastMouseX = 0;
+        // Keep coordinates within bounds
+        if (lastMouseY < 0) lastMouseY = window.innerHeight;
+        if (lastMouseY > window.innerHeight) lastMouseY = 0;
+        if (lastMouseX < 0) lastMouseX = window.innerWidth;
+        if (lastMouseX > window.innerWidth) lastMouseX = 0;
 
-          const fakeEvent = new MouseEvent('mousemove', {
-            bubbles: true,
-            cancelable: true,
-            clientX: lastMouseX,
-            clientY: lastMouseY,
-          });
-          canvas.dispatchEvent(fakeEvent);
-        }
-      } catch {
-        // Prevent scroll fluid errors
+        const fakeEvent = new MouseEvent('mousemove', {
+          bubbles: true,
+          cancelable: true,
+          clientX: lastMouseX,
+          clientY: lastMouseY,
+        });
+        canvas.dispatchEvent(fakeEvent);
       }
     };
     scrollContainer.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
+      // mediaQuery.removeEventListener('change', onThemeChange);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('touchend', onTouchEnd);
       scrollContainer.removeEventListener('scroll', onScroll);
     };
   }, [resolvedTheme]);

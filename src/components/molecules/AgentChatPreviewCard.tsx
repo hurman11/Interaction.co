@@ -163,13 +163,12 @@ export function AgentChatPreviewCard() {
         <span className="text-white/40 font-mono text-[0.7rem] truncate">
           Message Agent...
         </span>
-        <button
-          disabled
-          aria-label="Send message"
+        <div
+          aria-hidden="true"
           className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0"
         >
           <Send className="w-3 h-3" />
-        </button>
+        </div>
       </div>
     </div>
   );

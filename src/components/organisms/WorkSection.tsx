@@ -54,9 +54,12 @@ function WorkCard({ project, index, onOpen }: {
       viewport={{ once: true, amount: 0.15 }}
     >
       {/* Outer wrapper — group drives ALL hover children */}
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         onClick={onOpen}
-        className="group relative w-full text-left rounded-2xl overflow-hidden glass-card
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onOpen(); }}
+        className="group relative w-full text-left rounded-2xl overflow-hidden glass-card cursor-pointer
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue
                    transition-[border-color,box-shadow] duration-500
                    hover:border-black/15 dark:hover:border-white/20
@@ -150,7 +153,7 @@ function WorkCard({ project, index, onOpen }: {
                         opacity-0 group-hover:opacity-100
                         transition-opacity duration-500
                         bg-gradient-to-br from-accent-blue/6 to-transparent" />
-      </button>
+      </div>
     </motion.div>
   );
 }
