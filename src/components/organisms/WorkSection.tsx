@@ -116,7 +116,7 @@ function WorkCard({ project, index, onOpen }: {
             <span>{project.title}</span>
             {project.id === 'p2' && (
               <span className="px-2 py-0.5 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue font-mono text-[0.65rem] uppercase">
-                ENTERPRISE R&D
+                UPCOMING
               </span>
             )}
           </h3>
@@ -153,7 +153,7 @@ function WorkCard({ project, index, onOpen }: {
               {project.id === 'p2' ? (
                 <>
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" />
-                  <span className="text-xs text-accent-blue font-mono font-medium">Active Engineering — Unveiling 2025</span>
+                  <span className="text-xs text-accent-blue font-mono font-medium">Coming Soon</span>
                 </>
               ) : (
                 <>

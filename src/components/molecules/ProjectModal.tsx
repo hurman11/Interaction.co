@@ -79,10 +79,11 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover"
+                  unoptimized
+                  className={project.id === 'p2' ? "object-cover blur-lg scale-105 opacity-60" : "object-cover"}
                   sizes="(max-width: 768px) 100vw, 768px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                 <div className="absolute bottom-5 left-6">
                   <p className="text-accent-blue font-mono font-bold tracking-widest uppercase text-[0.65rem] mb-1">
                     {project.category}

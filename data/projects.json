@@ -16,17 +16,15 @@
   },
   {
     "id": "p2",
-    "title": "Next-Gen Enterprise AI",
-    "category": "Enterprise R&D Labs",
+    "title": "Coming Soon",
+    "category": "Upcoming",
     "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
     "link": "#",
-    "year": "2025",
-    "description": "A high-performance enterprise intelligence platform currently undergoing advanced engineering in our R&D lab. Public unveiling scheduled soon.",
-    "tags": ["Enterprise AI", "R&D Labs", "Distributed Systems"],
+    "year": "SOON",
+    "description": "Coming soon.",
+    "tags": ["Coming Soon"],
     "outcomes": [
-      { "label": "Development", "value": "Active R&D" },
-      { "label": "Milestone", "value": "85% Complete" },
-      { "label": "Launch Target", "value": "Q3 2025" }
+      { "label": "Status", "value": "Coming Soon" }
     ]
   }
 ]

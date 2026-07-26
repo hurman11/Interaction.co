@@ -2,71 +2,51 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Layers, Cpu, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 export function ComingSoonPreviewCard() {
   return (
-    <div className="w-full h-full min-h-[230px] rounded-2xl overflow-hidden bg-[#0a0b10] border border-white/10 flex flex-col justify-between p-5 text-white shadow-2xl relative group select-none">
-      {/* Ambient Gradient Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-accent-blue/10 pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-      
-      {/* Top Bar */}
-      <div className="flex items-center justify-between z-10">
-        <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" />
-          <span className="font-mono text-[0.65rem] font-semibold tracking-wider text-white/80 uppercase">
-            R&D LABS
+    <div className="w-full h-full min-h-[220px] rounded-2xl overflow-hidden bg-[#090a0f] border border-white/10 flex flex-col items-center justify-center p-6 text-center select-none relative group">
+      {/* Blurred Tech Background Image */}
+      <Image
+        src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop"
+        alt="Coming Soon Background"
+        fill
+        unoptimized
+        className="object-cover blur-lg scale-105 opacity-50 transition-transform duration-700 group-hover:scale-110"
+      />
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-none" />
+
+      {/* Main Coming Soon Message */}
+      <div className="relative z-10 space-y-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 backdrop-blur-md">
+          <span className="w-2 h-2 rounded-full bg-accent-blue animate-pulse" />
+          <span className="font-mono text-xs font-semibold tracking-widest text-white/90 uppercase">
+            UPCOMING
           </span>
         </div>
-        <span className="font-mono text-[0.65rem] text-white/40 tracking-widest uppercase flex items-center gap-1">
-          <Cpu className="w-3 h-3 text-accent-blue/80" />
-          V2.0 ARCHITECTURE
-        </span>
+
+        <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight">
+          Coming Soon
+        </h3>
+
+        <p className="text-xs text-white/60 font-light tracking-wide">
+          Stay tuned.
+        </p>
       </div>
 
-      {/* Center Content */}
-      <div className="my-auto z-10 space-y-3 py-2">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-blue/20 to-purple-500/20 border border-white/10 flex items-center justify-center shrink-0 backdrop-blur-md shadow-lg group-hover:border-accent-blue/40 transition-colors duration-500">
-            <Sparkles className="w-5 h-5 text-accent-blue" />
-          </div>
-          <div>
-            <h4 className="font-display font-bold text-sm tracking-tight text-white group-hover:text-accent-blue transition-colors">
-              Next-Gen Enterprise Platform
-            </h4>
-            <p className="font-mono text-[0.65rem] text-white/50 tracking-wide uppercase">
-              Active Engineering & Integration
-            </p>
-          </div>
-        </div>
-
-        {/* Progress Bar Component */}
-        <div className="space-y-1.5 pt-1">
-          <div className="flex justify-between items-center font-mono text-[0.6rem] text-white/50">
-            <span>DEVELOPMENT MILESTONE</span>
-            <span className="text-accent-blue font-bold">85% COMPLETE</span>
-          </div>
-          <div className="w-full h-1.5 rounded-full bg-white/5 overflow-hidden border border-white/5 p-0.5">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: '85%' }}
-              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              className="h-full rounded-full bg-gradient-to-r from-accent-blue to-purple-500"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="flex items-center justify-between z-10 pt-2 border-t border-white/5">
-        <span className="font-mono text-[0.65rem] text-white/40 uppercase tracking-wider">
-          UNVEILING 2025
-        </span>
-        <span className="text-xs text-white/60 group-hover:text-white font-medium flex items-center gap-1 transition-colors">
-          Confidential Spec
-          <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-accent-blue transition-colors" />
-        </span>
+      {/* Pulsing Dots Indicator */}
+      <div className="flex items-center gap-1.5 pt-4 relative z-10">
+        {[0, 1, 2].map((i) => (
+          <motion.span
+            key={i}
+            animate={{ opacity: [0.3, 1, 0.3], scale: [0.9, 1.1, 0.9] }}
+            transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.3 }}
+            className="w-1.5 h-1.5 rounded-full bg-accent-blue"
+          />
+        ))}
       </div>
     </div>
   );
