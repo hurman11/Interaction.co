@@ -9,6 +9,7 @@ import { LayoutGrid, ArrowRight } from 'lucide-react';
 import { ProjectModal } from '../molecules/ProjectModal';
 import { WhatsAppCaseStudyModal } from '../molecules/WhatsAppCaseStudyModal';
 import { AgentChatPreviewCard } from '../molecules/AgentChatPreviewCard';
+import { ComingSoonPreviewCard } from '../molecules/ComingSoonPreviewCard';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 interface Outcome { label: string; value: string }
@@ -65,10 +66,12 @@ function WorkCard({ project, index, onOpen }: {
                    hover:border-black/15 dark:hover:border-white/20
                    hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)]"
       >
-        {/* ── Image or Agent Chat Terminal ── */}
+        {/* ── Image, Agent Chat Terminal, or Coming Soon Preview ── */}
         <div className="relative w-full h-56 overflow-hidden">
           {project.id === 'p1' ? (
             <AgentChatPreviewCard />
+          ) : project.id === 'p2' ? (
+            <ComingSoonPreviewCard />
           ) : (
             <>
               <Image
@@ -109,8 +112,13 @@ function WorkCard({ project, index, onOpen }: {
         <div className="p-5">
           {/* Title — always visible */}
           <h3 className="text-base md:text-lg font-display font-bold text-text-primary tracking-tight
-                         transition-colors duration-500 group-hover:text-accent-blue">
-            {project.title}
+                         transition-colors duration-500 group-hover:text-accent-blue flex items-center justify-between">
+            <span>{project.title}</span>
+            {project.id === 'p2' && (
+              <span className="px-2 py-0.5 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue font-mono text-[0.65rem] uppercase">
+                ENTERPRISE R&D
+              </span>
+            )}
           </h3>
 
           {/* ── Hover-revealed details ─────────────────────────────────────
@@ -142,8 +150,17 @@ function WorkCard({ project, index, onOpen }: {
             )}
 
             <div className="flex items-center gap-2 pt-3">
-              <ArrowRight className="w-3.5 h-3.5 text-accent-blue" />
-              <span className="text-xs text-accent-blue font-medium">Click to view details</span>
+              {project.id === 'p2' ? (
+                <>
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" />
+                  <span className="text-xs text-accent-blue font-mono font-medium">Active Engineering — Unveiling 2025</span>
+                </>
+              ) : (
+                <>
+                  <ArrowRight className="w-3.5 h-3.5 text-accent-blue" />
+                  <span className="text-xs text-accent-blue font-medium">Click to view details</span>
+                </>
+              )}
             </div>
           </div>
         </div>
