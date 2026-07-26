@@ -16,47 +16,17 @@
   },
   {
     "id": "p2",
-    "title": "Nebula FinTech",
-    "category": "Fraud Detection System",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
+    "title": "Next Big Thing",
+    "category": "Coming Soon",
+    "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
     "link": "#",
-    "year": "2023",
-    "description": "Real-time fraud detection pipeline processing 2.7M transactions per second. Built a graph-ML model that flags anomalous behaviour 340ms before settlement, integrated directly into Nebula's core banking infrastructure.",
-    "tags": ["PyTorch", "Apache Kafka", "Go", "Neo4j", "Kubernetes"],
+    "year": "SOON",
+    "description": "A next-generation stealth project currently under active development. High-performance, AI-driven architecture coming very soon.",
+    "tags": ["Stealth Mode", "AI", "In Development"],
     "outcomes": [
-      { "label": "Transactions/sec", "value": "2.7M" },
-      { "label": "Detection latency", "value": "340ms" },
-      { "label": "False positives", "value": "−89%" }
-    ]
-  },
-  {
-    "id": "p3",
-    "title": "Quantum Healthcare",
-    "category": "Patient Triage Agent",
-    "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=2670&auto=format&fit=crop",
-    "link": "#",
-    "year": "2024",
-    "description": "AI triage agent that triages and prioritises ER patients based on vitals, history, and symptom NLP. Deployed across 12 hospital sites, reducing critical wait times by 41% while maintaining strict HIPAA compliance.",
-    "tags": ["Next.js", "GPT-4o", "Terraform", "HL7 FHIR", "AWS"],
-    "outcomes": [
-      { "label": "Wait time", "value": "−41%" },
-      { "label": "Sites deployed", "value": "12" },
-      { "label": "Accuracy", "value": "94.8%" }
-    ]
-  },
-  {
-    "id": "p4",
-    "title": "Nova Retail",
-    "category": "Dynamic Pricing Engine",
-    "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2670&auto=format&fit=crop",
-    "link": "#",
-    "year": "2023",
-    "description": "ML-driven pricing engine that reacts to competitor prices, inventory levels, and demand signals in real time across Nova's 80,000+ SKU catalogue. Delivered a 19% gross margin uplift in the first quarter post-launch.",
-    "tags": ["Spark", "Scikit-learn", "Node.js", "Redis", "GCP"],
-    "outcomes": [
-      { "label": "SKUs managed", "value": "80K+" },
-      { "label": "Margin uplift", "value": "+19%" },
-      { "label": "Price refresh", "value": "< 2min" }
+      { "label": "Status", "value": "In Stealth" },
+      { "label": "Progress", "value": "85%" },
+      { "label": "Launch", "value": "Coming Soon" }
     ]
   }
 ]
