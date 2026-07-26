@@ -81,16 +81,16 @@ export function WhatsAppCaseStudyModal({ isOpen, onClose }: WhatsAppCaseStudyMod
             <div className="relative w-full max-w-4xl max-h-[85vh] md:max-h-[90vh] overflow-y-auto rounded-3xl glass-card border border-black/10 dark:border-white/10 bg-white/90 dark:bg-[#08080a]/90 backdrop-blur-xl shadow-2xl pointer-events-auto flex flex-col text-text-primary">
               
               {/* Sticky Top Bar / Close Button */}
-              <div className="sticky top-0 z-30 flex items-center justify-between px-6 py-4 bg-white/70 dark:bg-[#08080a]/70 backdrop-blur-md border-b border-black/5 dark:border-white/5">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="font-mono text-xs font-bold uppercase tracking-widest text-text-muted">
-                    Case Study — WhatsApp AI Agent
+              <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 py-3.5 bg-white/95 dark:bg-[#08080a]/95 backdrop-blur-xl border-b border-black/5 dark:border-white/10 shrink-0">
+                <div className="flex items-center gap-2 min-w-0 pr-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <span className="font-mono text-[0.7rem] sm:text-xs font-bold uppercase tracking-widest text-text-muted truncate">
+                    WhatsApp AI Agent
                   </span>
                 </div>
                 <button
                   onClick={onClose}
-                  className="w-9 h-9 rounded-full flex items-center justify-center bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 border border-black/5 dark:border-white/10 transition-colors text-text-primary"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 border border-black/5 dark:border-white/10 transition-colors text-text-primary shrink-0"
                   aria-label="Close modal"
                 >
                   <X className="w-4 h-4" />
@@ -98,24 +98,24 @@ export function WhatsAppCaseStudyModal({ isOpen, onClose }: WhatsAppCaseStudyMod
               </div>
 
               {/* Main Content Area */}
-              <div className="p-6 md:p-10 space-y-10">
+              <div className="p-5 sm:p-8 md:p-10 space-y-8 md:space-y-10">
 
                 {/* HERO HEADER & LIVE TERMINAL SHOWCASE */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-black/5 dark:border-white/10 pb-8 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 border-b border-black/5 dark:border-white/10 pb-8 items-start pt-1 sm:pt-0">
                   <div className="lg:col-span-7 space-y-4">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-bold tracking-wider uppercase">
                       <Bot className="w-3.5 h-3.5" />
                       Autonomous Multi-Agent System
                     </div>
-                    <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight text-text-primary">
+                    <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight text-text-primary">
                       💬 WhatsApp AI Agent
                     </h1>
-                    <p className="text-base sm:text-lg text-text-secondary font-light leading-relaxed">
+                    <p className="text-sm sm:text-base md:text-lg text-text-secondary font-light leading-relaxed">
                       A self-hosted, headless AI assistant operating entirely inside WhatsApp. Performs remote server management, financial bill extraction, media processing, and memory search without opening a terminal or app.
                     </p>
 
                     {/* TECH BADGES */}
-                    <div className="flex flex-wrap gap-2 pt-2">
+                    <div className="flex flex-wrap gap-2 pt-1">
                       {[
                         'Node.js',
                         'WhatsApp Web (Puppeteer)',
@@ -128,7 +128,7 @@ export function WhatsAppCaseStudyModal({ isOpen, onClose }: WhatsAppCaseStudyMod
                       ].map((badge) => (
                         <span
                           key={badge}
-                          className="px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 font-mono text-xs text-text-secondary font-medium"
+                          className="px-2.5 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 font-mono text-[0.7rem] sm:text-xs text-text-secondary font-medium"
                         >
                           {badge}
                         </span>
@@ -137,7 +137,7 @@ export function WhatsAppCaseStudyModal({ isOpen, onClose }: WhatsAppCaseStudyMod
                   </div>
 
                   {/* LIVE SIMULATED TERMINAL CARD */}
-                  <div className="lg:col-span-5 h-[280px] w-full">
+                  <div className="lg:col-span-5 h-[230px] sm:h-[260px] lg:h-[280px] w-full shrink-0">
                     <AgentChatPreviewCard />
                   </div>
                 </div>
@@ -377,23 +377,17 @@ export function WhatsAppCaseStudyModal({ isOpen, onClose }: WhatsAppCaseStudyMod
 
                 {/* ACTION CTAs & FOOTER */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-black/5 dark:border-white/10 pt-6">
-                  <a
-                    href="https://github.com/hurman11"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto"
-                  >
-                    <Magnetic>
-                      <Button
-                        variant="rainbow"
-                        size="md"
-                        className="w-full sm:w-auto font-mono tracking-wider font-bold"
-                        iconRight={<ExternalLink className="w-4 h-4 text-fuchsia-400" />}
-                      >
-                        View GitHub Repository
-                      </Button>
-                    </Magnetic>
-                  </a>
+                  <Magnetic>
+                    <Button
+                      variant="rainbow"
+                      size="md"
+                      className="w-full sm:w-auto font-mono tracking-wider font-bold"
+                      onClick={() => window.open('https://github.com/hurman11', '_blank', 'noopener,noreferrer')}
+                      iconRight={<ExternalLink className="w-4 h-4 text-fuchsia-400" />}
+                    >
+                      View GitHub Repository
+                    </Button>
+                  </Magnetic>
 
                   <Magnetic>
                     <Button variant="secondary" size="md" onClick={onClose} className="w-full sm:w-auto">
