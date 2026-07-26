@@ -7,6 +7,9 @@ import projectsData from '../../../data/projects.json';
 import { BadgePill } from '../atoms/BadgePill';
 import { LayoutGrid, ArrowRight } from 'lucide-react';
 import { ProjectModal } from '../molecules/ProjectModal';
+import { WhatsAppCaseStudyModal } from '../molecules/WhatsAppCaseStudyModal';
+import { AgentChatPreviewCard } from '../molecules/AgentChatPreviewCard';
+import { ComingSoonPreviewCard } from '../molecules/ComingSoonPreviewCard';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 interface Outcome { label: string; value: string }
@@ -52,45 +55,56 @@ function WorkCard({ project, index, onOpen }: {
       viewport={{ once: true, amount: 0.15 }}
     >
       {/* Outer wrapper — group drives ALL hover children */}
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         onClick={onOpen}
-        className="group relative w-full text-left rounded-2xl overflow-hidden glass-card
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onOpen(); }}
+        className="group relative w-full text-left rounded-2xl overflow-hidden glass-card cursor-pointer
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue
                    transition-[border-color,box-shadow] duration-500
                    hover:border-black/15 dark:hover:border-white/20
                    hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)]"
       >
-        {/* ── Image ── */}
-        <div className="relative w-full h-52 overflow-hidden">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-            className="object-cover
-                       transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
-                       group-hover:scale-[1.05]"
-          />
+        {/* ── Image, Agent Chat Terminal, or Coming Soon Preview ── */}
+        <div className="relative w-full h-56 overflow-hidden">
+          {project.id === 'p1' ? (
+            <AgentChatPreviewCard />
+          ) : project.id === 'p2' ? (
+            <ComingSoonPreviewCard />
+          ) : (
+            <>
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+                className="object-cover
+                           transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+                           group-hover:scale-[1.05]"
+              />
 
-          {/* Gradient — deepens on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
-                          transition-opacity duration-500
-                          opacity-80 group-hover:opacity-100" />
+              {/* Gradient — deepens on hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                              transition-opacity duration-500
+                              opacity-80 group-hover:opacity-100" />
 
-          {/* Category pill — always visible */}
-          <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full
-                           bg-black/40 dark:bg-black/60 backdrop-blur-md
-                           text-white/90 font-mono font-bold tracking-widest uppercase text-[0.6rem]">
-            {project.category}
-          </span>
+              {/* Category pill — always visible */}
+              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full
+                               bg-black/40 dark:bg-black/60 backdrop-blur-md
+                               text-white/90 font-mono font-bold tracking-widest uppercase text-[0.6rem]">
+                {project.category}
+              </span>
 
-          {/* Year — always visible, top-right */}
-          {project.year && (
-            <span className="absolute top-3 right-3 px-2 py-1 rounded-full
-                             bg-black/30 backdrop-blur-md
-                             text-white/70 font-mono text-[0.6rem]">
-              {project.year}
-            </span>
+              {/* Year — always visible, top-right */}
+              {project.year && (
+                <span className="absolute top-3 right-3 px-2 py-1 rounded-full
+                                 bg-black/30 backdrop-blur-md
+                                 text-white/70 font-mono text-[0.6rem]">
+                  {project.year}
+                </span>
+              )}
+            </>
           )}
         </div>
 
@@ -98,8 +112,13 @@ function WorkCard({ project, index, onOpen }: {
         <div className="p-5">
           {/* Title — always visible */}
           <h3 className="text-base md:text-lg font-display font-bold text-text-primary tracking-tight
-                         transition-colors duration-500 group-hover:text-accent-blue">
-            {project.title}
+                         transition-colors duration-500 group-hover:text-accent-blue flex items-center justify-between">
+            <span>{project.title}</span>
+            {project.id === 'p2' && (
+              <span className="px-2 py-0.5 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue font-mono text-[0.65rem] uppercase">
+                UPCOMING
+              </span>
+            )}
           </h3>
 
           {/* ── Hover-revealed details ─────────────────────────────────────
@@ -131,8 +150,17 @@ function WorkCard({ project, index, onOpen }: {
             )}
 
             <div className="flex items-center gap-2 pt-3">
-              <ArrowRight className="w-3.5 h-3.5 text-accent-blue" />
-              <span className="text-xs text-accent-blue font-medium">Click to view details</span>
+              {project.id === 'p2' ? (
+                <>
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" />
+                  <span className="text-xs text-accent-blue font-mono font-medium">Coming Soon</span>
+                </>
+              ) : (
+                <>
+                  <ArrowRight className="w-3.5 h-3.5 text-accent-blue" />
+                  <span className="text-xs text-accent-blue font-medium">Click to view details</span>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -142,7 +170,7 @@ function WorkCard({ project, index, onOpen }: {
                         opacity-0 group-hover:opacity-100
                         transition-opacity duration-500
                         bg-gradient-to-br from-accent-blue/6 to-transparent" />
-      </button>
+      </div>
     </motion.div>
   );
 }
@@ -185,8 +213,15 @@ export function WorkSection() {
         </div>
       </div>
 
-      {/* Modal */}
-      <ProjectModal project={selected} onClose={() => setSelected(null)} />
+      {/* Modals */}
+      <WhatsAppCaseStudyModal
+        isOpen={selected?.id === 'p1'}
+        onClose={() => setSelected(null)}
+      />
+      <ProjectModal
+        project={selected?.id !== 'p1' ? selected : null}
+        onClose={() => setSelected(null)}
+      />
     </section>
   );
 }
