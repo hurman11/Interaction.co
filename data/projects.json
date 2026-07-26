@@ -1,17 +1,17 @@
 [
   {
     "id": "p1",
-    "title": "Astra Logistics",
-    "category": "AI Automation",
-    "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2670&auto=format&fit=crop",
-    "link": "#",
+    "title": "WhatsApp AI Agent",
+    "category": "Autonomous Multi-Agent System",
+    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
+    "link": "https://github.com/hurman11",
     "year": "2024",
-    "description": "End-to-end AI-powered automation of Astra's global logistics chain — from demand forecasting to last-mile routing. Reduced manual dispatch overhead by 74% and cut average delivery estimation error to under 3%.",
-    "tags": ["Python", "LangChain", "FastAPI", "PostgreSQL", "React"],
+    "description": "Self-hosted autonomous multi-tier AI assistant running on WhatsApp with 8 domain agents, 5-tier LLM fallback chain, server management, and FTS5 bill/notes database.",
+    "tags": ["Node.js", "WhatsApp Web", "SQLite WAL", "Groq", "OpenAI", "Gemini 2.5", "Ollama"],
     "outcomes": [
-      { "label": "Dispatch time", "value": "−74%" },
-      { "label": "Route accuracy", "value": "97.2%" },
-      { "label": "Cost savings", "value": "$2.4M/yr" }
+      { "label": "Response time", "value": "< 2s" },
+      { "label": "LLM Fallback", "value": "5 Tiers" },
+      { "label": "Specialist Agents", "value": "8 Domains" }
     ]
   },
   {

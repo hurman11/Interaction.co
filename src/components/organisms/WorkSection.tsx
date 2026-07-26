@@ -7,6 +7,8 @@ import projectsData from '../../../data/projects.json';
 import { BadgePill } from '../atoms/BadgePill';
 import { LayoutGrid, ArrowRight } from 'lucide-react';
 import { ProjectModal } from '../molecules/ProjectModal';
+import { WhatsAppCaseStudyModal } from '../molecules/WhatsAppCaseStudyModal';
+import { AgentChatPreviewCard } from '../molecules/AgentChatPreviewCard';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 interface Outcome { label: string; value: string }
@@ -60,37 +62,43 @@ function WorkCard({ project, index, onOpen }: {
                    hover:border-black/15 dark:hover:border-white/20
                    hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)]"
       >
-        {/* ── Image ── */}
-        <div className="relative w-full h-52 overflow-hidden">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-            className="object-cover
-                       transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
-                       group-hover:scale-[1.05]"
-          />
+        {/* ── Image or Agent Chat Terminal ── */}
+        <div className="relative w-full h-56 overflow-hidden">
+          {project.id === 'p1' ? (
+            <AgentChatPreviewCard />
+          ) : (
+            <>
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+                className="object-cover
+                           transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+                           group-hover:scale-[1.05]"
+              />
 
-          {/* Gradient — deepens on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
-                          transition-opacity duration-500
-                          opacity-80 group-hover:opacity-100" />
+              {/* Gradient — deepens on hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                              transition-opacity duration-500
+                              opacity-80 group-hover:opacity-100" />
 
-          {/* Category pill — always visible */}
-          <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full
-                           bg-black/40 dark:bg-black/60 backdrop-blur-md
-                           text-white/90 font-mono font-bold tracking-widest uppercase text-[0.6rem]">
-            {project.category}
-          </span>
+              {/* Category pill — always visible */}
+              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full
+                               bg-black/40 dark:bg-black/60 backdrop-blur-md
+                               text-white/90 font-mono font-bold tracking-widest uppercase text-[0.6rem]">
+                {project.category}
+              </span>
 
-          {/* Year — always visible, top-right */}
-          {project.year && (
-            <span className="absolute top-3 right-3 px-2 py-1 rounded-full
-                             bg-black/30 backdrop-blur-md
-                             text-white/70 font-mono text-[0.6rem]">
-              {project.year}
-            </span>
+              {/* Year — always visible, top-right */}
+              {project.year && (
+                <span className="absolute top-3 right-3 px-2 py-1 rounded-full
+                                 bg-black/30 backdrop-blur-md
+                                 text-white/70 font-mono text-[0.6rem]">
+                  {project.year}
+                </span>
+              )}
+            </>
           )}
         </div>
 
@@ -185,8 +193,15 @@ export function WorkSection() {
         </div>
       </div>
 
-      {/* Modal */}
-      <ProjectModal project={selected} onClose={() => setSelected(null)} />
+      {/* Modals */}
+      <WhatsAppCaseStudyModal
+        isOpen={selected?.id === 'p1'}
+        onClose={() => setSelected(null)}
+      />
+      <ProjectModal
+        project={selected?.id !== 'p1' ? selected : null}
+        onClose={() => setSelected(null)}
+      />
     </section>
   );
 }
